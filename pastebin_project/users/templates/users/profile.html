@@ -1,0 +1,15 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-section">
+		<div class="media">
+			<h2 class="account-heading">{{ user.username }}</h2>
+		</div>
+		<div>
+			<ul>
+				<li><a href="{% url 'change-password' %}">Change Your Password</a></li>
+				<li><a href="#">Delete Your Account</a></li>
+			</ul>
+		</div>
+	</div>
+{% endblock content %}
