@@ -26,27 +26,29 @@
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
           </li>
-   	   <a class="nav-item nav-link" href="{% url 'paste-create' %}">Create a New Paste</a>
+       <a class="nav-item nav-link" href="{% url 'paste-create' %}">Create a New Paste</a>
+     <a class="nav-item nav-link" href="{% url 'upload_paste' %}">Upload a Paste</a>
         </ul>
-			<ul class="navbar-nav mr-3">			
-			{% if user.is_authenticated %}
-				<li class="nav-item dropdown">
-		         <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
-		         <div class="dropdown-menu" aria-labelledby="dropdown01">
-		           <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-		           <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-		         </div>
-		       </li>
-			{% else %}
-				<li class="nav-item dropdown">
-		         <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Visitor</a>
-		         <div class="dropdown-menu" aria-labelledby="dropdown01">
-		           <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-		           <a class="dropdown-item" href="{% url 'register' %}">Register</a>
-		         </div>
-		       </li>		
-			{% endif %}
-			</ul>
+      <ul class="navbar-nav mr-3">      
+      {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
+             <div class="dropdown-menu" aria-labelledby="dropdown01">
+         <a class="dropdown-item" href="{% url 'inbox' %}">Inbox</a>
+               <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+             </div>
+           </li>
+      {% else %}
+        <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Visitor</a>
+             <div class="dropdown-menu" aria-labelledby="dropdown01">
+               <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+               <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+             </div>
+           </li>    
+      {% endif %}
+      </ul>
         <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -54,21 +56,21 @@
       </div>
     </nav>
 
-	<br>
+  <br>
     <main role="main">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-				<br>
-				<br>
-          	{% if messages %}
-					{% for message in messages %}
-						<div class="alert alert-{{ message.tags }}">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endif %}
-				{% block content %}{% endblock %}
+        <br>
+        <br>
+            {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
           </div>
         </div>
 
@@ -79,7 +81,7 @@
     </main>
 
     <footer class="container">
-      <p>&copy; Julie Mai: Assignment 2</p>
+      <small><p>&copy; Joanne Pham & Julie Mai: Assignment 2</p></small>
     </footer>
 
   <script src="js/vendor/modernizr-3.6.0.min.js"></script>

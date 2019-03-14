@@ -6,14 +6,20 @@ from .views import (
 	PasteCreateView,
 	PasteUpdateView,
 	PasteDeleteView,
-	search
+	search,
+	UploadPasteView,
+	UploadPasteDetailView
 )
 
 urlpatterns = [
+	
 	path('', PasteListView.as_view(), name='home'),
 	path('paste/<int:pk>/', PasteDetailView.as_view(), name='paste-detail'),
 	path('paste/new/', PasteCreateView.as_view(), name='paste-create'),
 	path('paste/<int:pk>/update/', PasteUpdateView.as_view(), name='paste-update'),
 	path('paste/<int:pk>/delete/', PasteDeleteView.as_view(), name='paste-delete'),
+
+	path('paste/upload/', UploadPasteView.as_view(), name='upload_paste'),
+
 	path('search/', search, name='search'),
 ]

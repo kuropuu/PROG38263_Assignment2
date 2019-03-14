@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from .forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
@@ -15,6 +16,9 @@ def register(request):
 	else:
 		form = UserCreationForm()
 	return render(request, 'users/register.html', { 'form': form })
+
+def password_reset(request):
+	return render(request, 'users/forgot_password.html')
 
 @login_required
 def profile(request):
@@ -34,3 +38,11 @@ def change_password(request):
 	else:
 		form = PasswordChangeForm(request.user)
 	return render(request, 'users/change_password.html', { 'form': form })
+
+@login_required
+def change_notifications(request):
+	return render(request, 'users/change_notifications.html')
+
+@login_required
+def notifications(request):
+	return render(request, 'users/notifications.html')
