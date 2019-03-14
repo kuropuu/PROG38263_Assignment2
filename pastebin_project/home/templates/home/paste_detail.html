@@ -13,7 +13,7 @@
 				{% endif %}
 			</div>
 			<h2 class="article-title">{{ object.title }}</h2>
-			<p class="article-content">{{ object.content }}</p>
+			<p class="article-content"><pre>{{ object.content }}</pre></p>
 			{% if paste.expiry is not null%}
 				<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
 			{% endif %}<br>

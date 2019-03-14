@@ -70,7 +70,8 @@ class PasteDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 # Pastes created through upload
 class UploadPasteDetailView(DetailView):
-	model = UploadPaste		
+	model = UploadPaste
+	print(model.content)
 
 class UploadPasteView(LoginRequiredMixin, CreateView):
 	model = UploadPaste

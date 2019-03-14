@@ -33,7 +33,7 @@ class Paste(models.Model):
 class UploadPaste(models.Model):
 	privacy = models.CharField(choices=privacy_choices, max_length=10, default='Private')
 	title = models.CharField(max_length=100)
-	content = models.FileField()
+	content = models.FileField(upload_to='./txtfiles/')
 	date_posted = models.DateTimeField(default=timezone.now)
 	creator = models.ForeignKey(User, on_delete=models.CASCADE,
 		related_name='%(class)s_requests_created')

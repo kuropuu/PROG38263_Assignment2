@@ -13,7 +13,9 @@
 				{% endif %}
 			</div>
 			<h2 class="article-title">{{ object.title }}</h2>
-			<p class="article-content">{{ object.content | }}</p>
+			<p class="article-content">
+				<embed src="{{ object.content.url }}" height=100px width=500px>
+			</p>
 			{% if paste.expiry is not null%}
 				<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
 			{% endif %}<br>

@@ -4,6 +4,8 @@ from django.urls import path, include
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 from notifier import views as inbox_views
+from django.conf import settings
+from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
      path('admin/', admin.site.urls),
@@ -28,3 +30,5 @@ urlpatterns = [
         name='password_reset_complete'),
      path('password/', user_views.change_password, name='change_password'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

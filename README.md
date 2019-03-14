@@ -14,7 +14,7 @@ We implemented the following security features into our web app:
 * File uploads are validated to only allow .txt files
 * Django requires the csrf_token to be defined for all forms to protect 
 against CSRF attacks
-* XSS protection is enabled by adding autoescape tags on the base.html file
+* XSS protection is enabled by adding autoescape tags on the base.html file, but is also built into Django with the SecurityMiddleware module
 * Django provides protection against SQL injection attacks, along with clickjacking
 
 ### Note about reset password function
