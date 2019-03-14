@@ -11,7 +11,6 @@ from django.views.generic import (
 from .models import Paste, UploadPaste
 from .forms import PasteCreationForm, PasteUploadForm
 from django.db.models import Q
-from django.http import HttpRequest
 
 def home(request):
 	return render(request, 'home/home.html')
@@ -71,7 +70,6 @@ class PasteDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 # Pastes created through upload
 class UploadPasteDetailView(DetailView):
 	model = UploadPaste
-	print(model.content)
 
 class UploadPasteView(LoginRequiredMixin, CreateView):
 	model = UploadPaste

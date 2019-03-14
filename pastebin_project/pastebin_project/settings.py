@@ -34,6 +34,7 @@ INSTALLED_APPS = [
      'home.apps.HomeConfig',
      'users.apps.UsersConfig',
      'crispy_forms',
+     'django_pygments'
      'notifier',
     'django.contrib.admin',
     'django.contrib.auth',

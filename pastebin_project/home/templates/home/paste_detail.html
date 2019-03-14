@@ -13,7 +13,20 @@
 				{% endif %}
 			</div>
 			<h2 class="article-title">{{ object.title }}</h2>
-			<p class="article-content"><pre>{{ object.content }}</pre></p>
+			<span class="d-block p-2 bg-dark text-white" style="width:500px;">RENDERED</span>
+			<div style="overflow:auto;
+					    width: 500px;
+					    height: 200px;
+					    border: 2px solid;
+					    border-color: #cccccc;
+					    padding-left: 5px;">
+				{{ object.content }}
+			</div><br><br>
+			<span class="d-block p-2 bg-dark text-white" style="width:500px; height:45px;">
+				RAW<button type="button" class="btn btn-secondary btn-sm" style="position: absolute; left:430px;">download</button></span>
+			<div class="article-content">
+				<pre>{{ object.content }}</pre>
+			</div>
 			{% if paste.expiry is not null%}
 				<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
 			{% endif %}<br>
