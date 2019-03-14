@@ -14,7 +14,6 @@ status_choices = (
 )
 
 class Paste(models.Model):
-	category = models.CharField(max_length=10, default='paste')
 	privacy = models.CharField(choices=privacy_choices, max_length=10, default='Private')
 	title = models.CharField(max_length=100)
 	content = models.TextField()
@@ -32,10 +31,9 @@ class Paste(models.Model):
 		return reverse('paste-detail', kwargs={'pk': self.pk})
 
 class UploadPaste(models.Model):
-	category = models.CharField(max_length=10, default='uploadpaste')
 	privacy = models.CharField(choices=privacy_choices, max_length=10, default='Private')
 	title = models.CharField(max_length=100)
-	content = models.FileField(upload_to='.')
+	content = models.FileField()
 	date_posted = models.DateTimeField(default=timezone.now)
 	creator = models.ForeignKey(User, on_delete=models.CASCADE,
 		related_name='%(class)s_requests_created')
@@ -47,4 +45,4 @@ class UploadPaste(models.Model):
 		return self.title
 
 	def get_absolute_url(self):
-		return reverse('paste-detail', kwargs={'pk': self.pk})
+		return reverse('upload_detail', kwargs={'pk': self.pk})

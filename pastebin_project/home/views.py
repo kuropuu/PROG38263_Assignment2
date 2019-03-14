@@ -11,6 +11,7 @@ from django.views.generic import (
 from .models import Paste, UploadPaste
 from .forms import PasteCreationForm, PasteUploadForm
 from django.db.models import Q
+from django.http import HttpRequest
 
 def home(request):
 	return render(request, 'home/home.html')
@@ -20,7 +21,6 @@ class PasteListView(ListView, ContextMixin):
 	model = Paste
 	template_name = 'home/home.html'
 	context_object_name = 'pastes'
-	# ordering = ['-date_posted']
 	
 	def get_queryset(self):
 		return Paste.objects.order_by('-date_posted')
@@ -70,13 +70,7 @@ class PasteDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 # Pastes created through upload
 class UploadPasteDetailView(DetailView):
-	model = UploadPaste
-
-class UploadPasteListView(ListView):
-	model = UploadPaste
-	template_name = 'home/home.html'
-	context_object_name = 'uploadpastes'
-	ordering = ['-date_posted']
+	model = UploadPaste		
 
 class UploadPasteView(LoginRequiredMixin, CreateView):
 	model = UploadPaste
@@ -84,7 +78,7 @@ class UploadPasteView(LoginRequiredMixin, CreateView):
 
 	def upload_paste (request):
 		if request.method == 'POST':
-			form = PasteUploadForm(request.POST, request.FILES)
+			form = PasteUploadForm(request.POST)
 			return render(request, 'home/uploadpaste_form.html', {'form': form})
 		else:
 			return render(request, 'home/uploadpaste_form.html')
@@ -92,6 +86,30 @@ class UploadPasteView(LoginRequiredMixin, CreateView):
 	def form_valid (self, form):
 		form.instance.creator = self.request.user
 		return super().form_valid(form)
+
+class UploadPasteUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	model = UploadPaste
+	form_class = PasteUploadForm
+	
+	def form_valid(self, form):
+		form.instance.creator = self.request.user
+		return super().form_valid(form)
+
+	def test_func(self):
+		uploadpaste = self.get_object()
+		if self.request.user == uploadpaste.creator:
+			return True
+		return False
+
+class UploadPasteDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+	model = UploadPaste
+	success_url = '/'
+
+	def test_func(self):
+		uploadpaste = self.get_object()
+		if self.request.user == uploadpaste.creator:
+			return True
+		return False
 
 # Search for keywords in pastes
 def search(request):

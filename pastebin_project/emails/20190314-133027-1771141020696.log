@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: phamjoan@sheridancollege.ca
+Date: Thu, 14 Mar 2019 17:30:27 -0000
+Message-ID: <155258462727.8916.4339482893891992780@DESKTOP-3UNOH7Q>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/password_reset_confirm/OA/54m-888da5418be8314a2cf5/
+
+Your username, in case you've forgotten: phamjoan
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

@@ -9,78 +9,24 @@
 
 	<h2 class="display-6">Last 5 Uploaded Pastes</h2>
 	<!-- Uploaded pastes -->
-	{% for upload in uploadpastes %}
-		{% if upload.privacy == "Public" or upload.creator == user %}
-			<hr>
-			<article class="media content-section">
-				<div class="media-body">
-					<div class="article-metadata">
-						<a class="mr-2 text-muted">{{ upload.privacy }}</a>
-						<a class="mr-2" href="#">{{ upload.creator }}</a><br>
-						<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
-					</div>
-					<h2><a class="article-title" href="{% url 'paste-detail' upload.id %}">{{ upload.title }}</a></h2>
-					<p class="article-content">{{ upload.content }}</p>
-					{% if upload.expiry %}
-						<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>
-					{% endif %}<br>
-					{% if upload.invited_users.all %}
-						<small class="text-muted">Invited Users:</small>	{% for username in upload.invited_users.all %}
-							<small class="text-muted">{{ username }}</small>
-						{% endfor %}
-					{% endif %}
-				</div>
-			</article>
-			<br>
-		{% endif %}
-		{% for username in upload.invited_users.all %}
-			{% if username == user %}
+	{% if uploadpastes %}
+		{% for upload in uploadpastes %}
+			{% if upload.privacy == "Public" or upload.creator == user %}
+				<hr>
 				<article class="media content-section">
 					<div class="media-body">
 						<div class="article-metadata">
-							<small class="mr-2 text-muted">You've been invited to view this paste:</small><br>
 							<a class="mr-2 text-muted">{{ upload.privacy }}</a>
 							<a class="mr-2" href="#">{{ upload.creator }}</a><br>
 							<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
 						</div>
-						<h2><a class="article-title" href="{% url 'paste-detail' upload.id %}">{{ upload.title }}</a></h2>
+						<h2><a class="article-title" href="{% url 'upload_detail' upload.id %}">{{ upload.title }}</a></h2>
 						<p class="article-content">{{ upload.content }}</p>
 						{% if upload.expiry %}
 							<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>
 						{% endif %}<br>
 						{% if upload.invited_users.all %}
-							<small class="text-muted">Invited Users:</small>
-							{% for username in upload.invited_users.all %}
-								<small class="text-muted">{{ username }}</small>
-							{% endfor %}
-						{% endif %}
-					</div>
-				</article>
-			{% endif %}
-		{% endfor %}
-	{% endfor %}
-
-	<h2 class="display-6">Last 5 Created Pastes</h2>
-	<!-- Regular pastes -->
-	{% for paste in pastes %}
-		{% if paste.status == "Enabled" or upload.status == "Enabled" %}
-			{% if paste.privacy == "Public" or paste.author == user %}
-				<hr>
-				<article class="media content-section">
-					<div class="media-body">
-						<div class="article-metadata">
-							<a class="mr-2 text-muted">{{ paste.privacy }}</a>
-							<a class="mr-2" href="#">{{ paste.author }}</a><br>
-								<small class="text-muted">{{ paste.date_posted|date:"F d, Y" }}</small>
-						</div>
-						<h2><a class="article-title" href="{% url 'paste-detail' paste.id %}">{{ paste.title }}</a></h2>
-						<p class="article-content">{{ paste.content }}</p>
-						{% if paste.expiry %}
-							<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
-						{% endif %}<br>
-						{% if paste.invited_users.all %}
-							<small class="text-muted">Invited Users:</small>
-							{% for username in paste.invited_users.all %}
+							<small class="text-muted">Invited Users:</small>	{% for username in upload.invited_users.all %}
 								<small class="text-muted">{{ username }}</small>
 							{% endfor %}
 						{% endif %}
@@ -88,15 +34,50 @@
 				</article>
 				<br>
 			{% endif %}
-			{% for username in paste.invited_users.all %}
+			{% for username in upload.invited_users.all %}
 				{% if username == user %}
 					<article class="media content-section">
 						<div class="media-body">
 							<div class="article-metadata">
 								<small class="mr-2 text-muted">You've been invited to view this paste:</small><br>
+								<a class="mr-2 text-muted">{{ upload.privacy }}</a>
+								<a class="mr-2" href="#">{{ upload.creator }}</a><br>
+								<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
+							</div>
+							<h2><a class="article-title" href="{% url 'paste-detail' upload.id %}">{{ upload.title }}</a></h2>
+							<p class="article-content">{{ upload.content }}</p>
+							{% if upload.expiry %}
+								<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>
+							{% endif %}<br>
+							{% if upload.invited_users.all %}
+								<small class="text-muted">Invited Users:</small>
+								{% for username in upload.invited_users.all %}
+									<small class="text-muted">{{ username }}</small>
+								{% endfor %}
+							{% endif %}
+						</div>
+					</article>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	{% else %}
+		<hr>
+		<p class="mr-2 text-muted">No pastes have been uploaded yet.</p>
+	{% endif %}
+
+	<!-- Regular pastes -->
+	<h2 class="display-6">Last 5 Created Pastes</h2>
+	{% if pastes %}
+		{% for paste in pastes %}
+			{% if paste.status == "Enabled" or upload.status == "Enabled" %}
+				{% if paste.privacy == "Public" or paste.author == user %}
+					<hr>
+					<article class="media content-section">
+						<div class="media-body">
+							<div class="article-metadata">
 								<a class="mr-2 text-muted">{{ paste.privacy }}</a>
-								<a class="mr-2" href="#">{{ paste.creator }}</a><br>
-								<small class="text-muted">{{ paste.date_posted|date:"F d, Y" }}</small>
+								<a class="mr-2" href="#">{{ paste.author }}</a><br>
+									<small class="text-muted">{{ paste.date_posted|date:"F d, Y" }}</small>
 							</div>
 							<h2><a class="article-title" href="{% url 'paste-detail' paste.id %}">{{ paste.title }}</a></h2>
 							<p class="article-content">{{ paste.content }}</p>
@@ -111,8 +92,37 @@
 							{% endif %}
 						</div>
 					</article>
+					<br>
 				{% endif %}
-			{% endfor %}
-		{% endif %}
-	{% endfor %}
+				{% for username in paste.invited_users.all %}
+					{% if username == user %}
+						<article class="media content-section">
+							<div class="media-body">
+								<div class="article-metadata">
+									<small class="mr-2 text-muted">You've been invited to view this paste:</small><br>
+									<a class="mr-2 text-muted">{{ paste.privacy }}</a>
+									<a class="mr-2" href="#">{{ paste.creator }}</a><br>
+									<small class="text-muted">{{ paste.date_posted|date:"F d, Y" }}</small>
+								</div>
+								<h2><a class="article-title" href="{% url 'paste-detail' paste.id %}">{{ paste.title }}</a></h2>
+								<p class="article-content">{{ paste.content }}</p>
+								{% if paste.expiry %}
+									<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
+								{% endif %}<br>
+								{% if paste.invited_users.all %}
+									<small class="text-muted">Invited Users:</small>
+									{% for username in paste.invited_users.all %}
+										<small class="text-muted">{{ username }}</small>
+									{% endfor %}
+								{% endif %}
+							</div>
+						</article>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<hr>
+		<p class="mr-2 text-muted">No pastes have been created yet.</p>
+	{% endif %}
 {% endblock content %}

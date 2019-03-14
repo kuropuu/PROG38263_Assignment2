@@ -1,0 +1,28 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<article class="media content-section">
+		<div class="media-body">
+			<div class="article-metadata">
+				<a class="mr-2" href="#">{{ object.creator }}</a>
+				<small class="text-muted">{{ object.date_posted|date:"F d, Y"}}</small>
+				{% if object.creator == user %}
+					<div>
+						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'upload_update' object.id %}">Update</a>
+						<a class="btn btn-danger btn-sm mt-1 mb-a" href="{% url 'upload_delete' object.id %}">Delete</a>
+				{% endif %}
+			</div>
+			<h2 class="article-title">{{ object.title }}</h2>
+			<p class="article-content">{{ object.content | }}</p>
+			{% if paste.expiry is not null%}
+				<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
+			{% endif %}<br>
+			{% if paste.invited_users.all %}
+				<small class="text-muted">Invited Users:</small>
+				{% for username in paste.invited_users.all %}
+					<small class="text-muted">{{ username }}</small>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</article>
+{% endblock content %}
