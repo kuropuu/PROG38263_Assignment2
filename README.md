@@ -9,6 +9,7 @@ This web application requires:
 * pip
 * Crispy Forms
 * SQLite3
+* django-upload-validator
 
 ### Installation of Add-Ons
 Install Crispy Forms by running `pip install django-crispy-forms`.
