@@ -10,8 +10,19 @@
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="apple-touch-icon" href="icon.png">
-
+  <style>
+    pre {
+      overflow:auto;
+      width: 500px;
+      height: 100px;
+      border: 2px solid;
+      border-color: #ccc;
+      padding-left: 5px;
+    }
+  </style>
 </head>
+
+{% autoescape on %}
 
 <body>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -25,27 +36,29 @@
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
           </li>
-   	   <a class="nav-item nav-link" href="{% url 'paste-create' %}">Create a New Paste</a>
+       <a class="nav-item nav-link" href="{% url 'paste-create' %}">Create a New Paste</a>
+     	<a class="nav-item nav-link" href="{% url 'upload_paste' %}">Upload a Paste</a>
         </ul>
-			<ul class="navbar-nav mr-3">			
-			{% if user.is_authenticated %}
-				<li class="nav-item dropdown">
-		         <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
-		         <div class="dropdown-menu" aria-labelledby="dropdown01">
-		           <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-		           <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-		         </div>
-		       </li>
-			{% else %}
-				<li class="nav-item dropdown">
-		         <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Visitor</a>
-		         <div class="dropdown-menu" aria-labelledby="dropdown01">
-		           <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-		           <a class="dropdown-item" href="{% url 'register' %}">Register</a>
-		         </div>
-		       </li>		
-			{% endif %}
-			</ul>
+      <ul class="navbar-nav mr-3">      
+      {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
+             <div class="dropdown-menu" aria-labelledby="dropdown01">
+               <a class="dropdown-item" href="{% url 'inbox' %}">Notifications</a>
+               <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+             </div>
+           </li>
+      {% else %}
+        <li class="nav-item dropdown">
+             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Visitor</a>
+             <div class="dropdown-menu" aria-labelledby="dropdown01">
+               <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+               <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+             </div>
+           </li>    
+      {% endif %}
+      </ul>
         <form method="GET" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -53,21 +66,21 @@
       </div>
     </nav>
 
-	<br>
+  <br>
     <main role="main">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-				<br>
-				<br>
-          	{% if messages %}
-					{% for message in messages %}
-						<div class="alert alert-{{ message.tags }}">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endif %}
-				{% block content %}{% endblock %}
+        <br>
+        <br>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
           </div>
         </div>
 
@@ -78,7 +91,7 @@
     </main>
 
     <footer class="container">
-      <p>&copy; Julie Mai: Assignment 2</p>
+      <small><p>&copy; Joanne Pham & Julie Mai: Assignment 2</p></small>
     </footer>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -93,5 +106,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+
+{% endautoescape %}
 
 </html>
