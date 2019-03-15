@@ -7,6 +7,7 @@
 				<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
 		</div>
 	</div>
+	<h1 class="mb-3"> Pastes By {{ view.kwargs.username }}</h1>
 	{% for paste in pastes %}
 		{% if paste.expired == False %}
 			{% if paste.status == "Enabled" %}
@@ -18,7 +19,7 @@
 								<a class="mr-2" href="{% url 'user-pastes' paste.author.username %}">{{ paste.author }}</a><br>
 								<small class="text-muted">{{ paste.date_posted|date:"F d, Y" }}</small>
 							</div>
-							<h2><a class="article-title" href="{% url 'paste-detail' paste.slug %}">{{ paste.title }}</a></h2>
+							<h2><a class="article-title" href="{% url 'paste-detail' paste.id %}">{{ paste.title }}</a></h2>
 							<p class="article-content">{{ paste.content }}</p>
 							{% if paste.expiry %}
 								<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
@@ -31,6 +32,7 @@
 							{% endif %}
 						</div>
 					</article>
+					<br>
 				{% endif %}
 				{% for username in paste.invited_users.all %}
 					{% if username == user %}
@@ -42,7 +44,7 @@
 									<a class="mr-2" href="#">{{ paste.author }}</a><br>
 									<small class="text-muted">{{ paste.date_posted|date:"F d, Y" }}</small>
 								</div>
-								<h2><a class="article-title" href="{% url 'paste-detail' paste.slug %}">{{ paste.title }}</a></h2>
+								<h2><a class="article-title" href="{% url 'paste-detail' paste.id %}">{{ paste.title }}</a></h2>
 								<p class="article-content">{{ paste.content }}</p>
 								{% if paste.expiry %}
 									<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>

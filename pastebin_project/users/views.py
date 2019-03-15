@@ -3,9 +3,12 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.models import User
 
 def register(request):
-	if request.method == "POST":
+	if request.user.is_authenticated:
+		return redirect('profile')
+	elif request.method == "POST":
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
 			form.save()
@@ -34,3 +37,15 @@ def change_password(request):
 	else:
 		form = PasswordChangeForm(request.user)
 	return render(request, 'users/change_password.html', { 'form': form })
+
+@login_required
+def delete_user(request):
+	if request.method == 'POST':
+		if 'delete' in request.POST:
+			account = User.objects.get(username=request.user)
+			account.delete()
+			messages.success(request, 'Your account was successfully deleted.')
+			return redirect('login')
+		
+	else:				
+		return render(request, 'users/user_confirm_delete.html')

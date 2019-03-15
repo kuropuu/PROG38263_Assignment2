@@ -4,12 +4,12 @@
 	<article class="media content-section">
 		<div class="media-body">
 			<div class="article-metadata">
-				<a class="mr-2" href="#">{{ object.author }}</a>
+				<a class="mr-2" href="{% url 'user-pastes' object.author.username %}">{{ object.author }}</a>
 				<small class="text-muted">{{ object.date_posted|date:"F d, Y"}}</small>
 				{% if object.author == user %}
 					<div>
-						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'paste-update' object.id %}">Update</a>
-						<a class="btn btn-danger btn-sm mt-1 mb-a" href="{% url 'paste-delete' object.id %}">Delete</a>
+						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'paste-update' object.slug %}">Update</a>
+						<a class="btn btn-danger btn-sm mt-1 mb-a" href="{% url 'paste-delete' object.slug %}">Delete</a>
 				{% endif %}
 			</div>
 			<h2 class="article-title">{{ object.title }}</h2>

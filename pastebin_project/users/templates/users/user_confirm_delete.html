@@ -1,0 +1,17 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-section">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-botton mb-4">Delete Account</legend>
+				<h2>Are you sure you want to delete your account?</h2>
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-danger" type="submit" name="delete">Yes, I'm sure</button>
+				<a class="btn btn-outline-secondary" href="{% url 'profile' %}">Cancel</a>
+			</div>
+		</form>
+	</div>
+{% endblock content %}

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import (
 	PasteListView,
+	UserPasteListView,
 	PasteDetailView,
 	PasteCreateView,
 	PasteUpdateView,
@@ -11,9 +12,10 @@ from .views import (
 
 urlpatterns = [
 	path('', PasteListView.as_view(), name='home'),
-	path('paste/<int:pk>/', PasteDetailView.as_view(), name='paste-detail'),
+	path('user/<str:username>', UserPasteListView.as_view(), name='user-pastes'),
 	path('paste/new/', PasteCreateView.as_view(), name='paste-create'),
-	path('paste/<int:pk>/update/', PasteUpdateView.as_view(), name='paste-update'),
-	path('paste/<int:pk>/delete/', PasteDeleteView.as_view(), name='paste-delete'),
+	path('paste/<str:slug>/', PasteDetailView.as_view(), name='paste-detail'),
+	path('paste/<str:slug>/update/', PasteUpdateView.as_view(), name='paste-update'),
+	path('paste/<str:slug>/delete/', PasteDeleteView.as_view(), name='paste-delete'),
 	path('search/', search, name='search'),
 ]
