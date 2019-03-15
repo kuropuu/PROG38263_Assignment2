@@ -8,10 +8,10 @@ This web application requires:
 * Virtualenv
 * pip
 * Crispy Forms
-* Pygments
+* SQLite3
 
 ### Installation of Add-Ons
-Install Crispy Forms and Pygments by running `pip install django-crispy-forms` and `pip install pygments` `pip install django-pygments`, respectively.
+Install Crispy Forms by running `pip install django-crispy-forms`.
 
 ### Security Features
 We implemented the following security features into our web app:

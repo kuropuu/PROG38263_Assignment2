@@ -9,13 +9,30 @@
 				{% if object.creator == user %}
 					<div>
 						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'upload_update' object.id %}">Update</a>
-						<a class="btn btn-danger btn-sm mt-1 mb-a" href="{% url 'upload_delete' object.id %}">Delete</a>
+						<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'upload_delete' object.id %}">Delete</a>
 				{% endif %}
 			</div>
 			<h2 class="article-title">{{ object.title }}</h2>
-			<p class="article-content">
-				<embed src="{{ object.content.url }}" height=100px width=500px>
-			</p>
+			<span class="d-block p-2 bg-dark text-white" style="width:500px; height:45px;">RENDERED</span>
+			<div style="overflow:auto;
+					    width: 500px;
+					    height: 200px;
+					    border: 2px solid;
+					    border-color: #cccccc;
+					    padding-left: 5px;">
+				<embed src="{{ object.content.url }}" height=100px width=450px>
+			</div><br><br>
+			<span class="d-block p-2 bg-dark text-white" style="width:500px; height:45px;">RAW
+				<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="position: absolute; left:430px;">download</button></a>
+			</span>
+			<div style="overflow:auto;
+					    width: 500px;
+					    height: 100px;
+					    border: 2px solid;
+					    border-color: #cccccc;
+					    padding-left: 5px;">
+				<embed src="{{ object.content.url }}" height=85px; width=450px></pre>
+			</div>
 			{% if paste.expiry is not null%}
 				<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>
 			{% endif %}<br>

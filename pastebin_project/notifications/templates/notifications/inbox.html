@@ -1,0 +1,26 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<div class="content-section">
+		<div class="media">
+			<h2 class="account-heading">Notification Inbox</h2>
+		</div>
+		<div>
+			Here are your notifications:<br>
+			<ul>
+				{% for n in notifications %}
+					{% if n.user == user %}
+						{% if n.viewed %}
+							<li class="list-group-item list-group-item-secondary"><a href="{% url 'show_notification' n.id %}">{{ n.title }}</a></li>
+						{% else %}
+							<li class="list-group-item list-group-item-success">
+							<a href="{% url 'show_notification' n.id %}">
+								{{ n.title }}</a>
+							</li>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+{% endblock content %}
