@@ -21,22 +21,19 @@ def home(request):
 class PasteListView(ListView, ContextMixin):
 	model = Paste
 	template_name = 'home/home.html'
-	context_object_name = 'pastes'
-	ordering = ['-date_posted']
 	paginate_by = 10
 
 	def get_context_data(self, **kwargs):
 		context = super(PasteListView, self).get_context_data(**kwargs)
 		context.update({
 			'uploadpastes': UploadPaste.objects.order_by('-date_posted'),
-			'more_context': Paste.objects.all(),
+			'pastes': Paste.objects.all().order_by('-date_posted'),
 		})
 		return context
 
 class UserPasteListView(ListView):
 	model = Paste
 	template_name = 'home/user_pastes.html'
-	context_object_name = 'pastes'
 	paginate_by = 10
 
 	def get_context_data(self, **kwargs):
@@ -44,7 +41,7 @@ class UserPasteListView(ListView):
 		context = super(UserPasteListView, self).get_context_data(**kwargs)
 		context.update({
 			'uploadpastes': UploadPaste.objects.order_by('-date_posted'),
-			'more_context': Paste.objects.filter(author=user).order_by('-date_posted'),
+			'pastes': Paste.objects.filter(author=user).order_by('-date_posted'),
 		})
 		return context
 
