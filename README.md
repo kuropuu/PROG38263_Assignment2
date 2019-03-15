@@ -5,9 +5,26 @@ Coded by Joanne Pham (@kuropuu) & Julie Mai (@juuliemai)
 This web application requires:
 * Python 3
 * Django 2.0+
-* django-crispy-forms
+* Virtualenv
+* pip
+* Crispy Forms
+* Pygments
 
-### Reset Password Function
+### Installation of Add-Ons
+Install Crispy Forms and Pygments by running `pip install django-crispy-forms` and `pip install pygments` `pip install django-pygments`, respectively.
+
+### Security Features
+We implemented the following security features into our web app:
+* Web app is served over HTTPS
+* Secure authentication and authorization scheme
+* Passwords are hashed in the database
+* File uploads are validated to only allow .txt files
+* Django requires the csrf_token to be defined for all forms to protect 
+against CSRF attacks
+* XSS protection is enabled by adding autoescape tags on the base.html file, but is also built into Django with the SecurityMiddleware module
+* Django provides protection against SQL injection attacks, along with clickjacking
+
+### Note about reset password function
 We did not implement a SMTP server since this is only for development purposes. 
 We sent the emails to a folder in the project's home directory called "emails." 
 If you are trying to reset your password, simply type in the email address 
