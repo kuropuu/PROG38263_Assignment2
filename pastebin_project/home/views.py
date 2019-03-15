@@ -124,10 +124,11 @@ def search(request):
 	query = request.GET.get('q')
 	results = Paste.objects.filter(Q(title__icontains=query) |
 											 Q(content__icontains=query))
-	paginate_by = 10
 
 	uploadResults = UploadPaste.objects.filter(Q(title__icontains=query) |
 											 Q(content__icontains=query))
+	paginate_by = 10
+
 	context = {
 		'pastes':results,
 		'uploadpastes':uploadResults

@@ -4,7 +4,6 @@
 		<div class="container">
 			<h1 class="display-3">Welcome!</h1>
 				<p>This is a website that allows you to create pastes and share them with others!</p>
-				<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
 		</div>
 	</div>
 	<h1 class="mb-3"> Pastes By {{ view.kwargs.username }}</h1>
@@ -68,6 +67,9 @@
 		{% for upload in uploadpastes %}
 			{% if upload.privacy == "Public" or upload.creator == user %}
 				<hr>
+				{% if upload.expired == True %}
+					<a class="mr-2 text-muted">EXPIRED</a>
+				{% endif %}
 				<article class="media content-section">
 					<div class="media-body">
 						<div class="article-metadata">
