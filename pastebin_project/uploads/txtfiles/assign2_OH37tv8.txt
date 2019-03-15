@@ -1,0 +1,12 @@
+- Security stuff
+- Can configure "watch" words and receive notifications in account
+- Notification about invited posts
+- Deployment
+
+- Download raw posts as text file [Joanne]
+
+- Regular backup service
+- Design
+
+**superuser shouldn't be able to access app
+**login and logout page should not be viewed by logged in user

@@ -23,7 +23,11 @@
 				<embed src="{{ object.content.url }}" height=100px width=450px>
 			</div><br><br>
 			<span class="d-block p-2 bg-dark text-white" style="width:500px; height:45px;">RAW
-				<a href="#"><button type="button" class="btn btn-secondary btn-sm" style="position: absolute; left:430px;">download</button></a>
+				<form method="POST" action="{% url 'download-paste' object.slug %}">
+					{% csrf_token %}
+		       	<input class="form-control mr-sm-2" type="hidden" name="content" value="{{ object.content }}">
+		       	<button class="btn btn-secondary btn-sm" style="position: absolute; left:570px;" type="submit">download</button>
+		     </form> 
 			</span>
 			<div style="overflow:auto;
 					    width: 500px;

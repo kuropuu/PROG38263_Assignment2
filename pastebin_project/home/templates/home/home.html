@@ -74,6 +74,7 @@
 								<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
 							</div>
 							<h2><a class="article-title" href="{% url 'upload_detail' upload.slug %}">{{ upload.title }}</a></h2>
+							<p class="article-content">{{ paste.content }}</p>
 							<p class="article-content">
 								<embed src="{{ upload.content.url }}" height=100px width=500px>
 							</p>
@@ -99,6 +100,11 @@
 									<a class="mr-2 text-muted">{{ upload.privacy }}</a>
 									<a class="mr-2" href="{% url 'user-pastes' upload.creator.username %}">{{ upload.creator }}</a><br>
 									<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
+								<h2><a class="article-title" href="{% url 'upload_detail' upload.slug %}">{{ upload.title }}</a></h2>
+								<p class="article-content">{{ paste.content }}</p>
+								<p class="article-content">
+									<embed src="{{ upload.content.url }}" height=100px width=500px>
+								</p>
 								</div>
 								{% if upload.expiry %}
 									<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>

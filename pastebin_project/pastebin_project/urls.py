@@ -16,7 +16,6 @@ urlpatterns = [
 	 path('password/', user_views.change_password, name='change-password'),
     path('delete/', user_views.delete_user, name='user-delete'),
     path('inbox/', include('notifications.urls')),
-    path('change_notifications/', user_views.change_notifications, name='change_notifications'),
     path('password_reset/', 
        auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), 
         name='password_reset'),

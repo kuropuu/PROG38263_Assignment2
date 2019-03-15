@@ -3,18 +3,19 @@
 {% block content %}
 	<div class="content-section">
 		<div class="media">
-			<h5 class="account-heading">
+			<h3>
+			<li class="list-group-item list-group-item-primary">
 				Subject: {{ notification.title }}
-			</h5>
+			</li></h3>
 		</div>
 		<br>
 		<div>
-			<p style="border:2px solid; border-color: #ccc; height:100px; width:500px; padding-left: 5px; overflow:auto;">
-				{{ notification.message }}
+			<p style="height:100px; width:500px; padding-left: 5px; overflow:auto;">
+				{{ notification.message | safe }}
 			</p>
 		</div>
 		<div>
-			<a href="{% url 'delete_notification' notification.id %}">Mark as read</a>
+			<a href="{% url 'delete_notification' notification.id %}" type="button" class="btn btn-primary">Mark as read</a>
 		</div>
 	</div>
 {% endblock content %}

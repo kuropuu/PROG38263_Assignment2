@@ -9,7 +9,7 @@
 				{% if object.author == user %}
 					<div>
 						<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'paste-update' object.slug %}">Update</a>
-						<a class="btn btn-danger btn-sm mt-1 mb-a" href="{% url 'paste-delete' object.slug %}">Delete</a>
+						<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'paste-delete' object.slug %}">Delete</a>
 				{% endif %}
 			</div>
 			<h2 class="article-title">{{ object.title }}</h2>
@@ -17,21 +17,21 @@
 			<div style="overflow:auto;
 					    width: 500px;
 					    height: 200px;
-					    border: 2px solid;
-					    border-color: #cccccc;
-					    padding-left: 5px;">
-				{{ object.content }}
+							 border: 2px solid;
+							 border-color: #cccccc;
+							 padding-left: 5px;">
+				 {{ object.content }}
 			</div><br><br>
 			<span class="d-block p-2 bg-dark text-white" style="width:500px; height:45px;">
 				RAW
 				<form method="POST" action="{% url 'download-paste' object.slug %}">
 					{% csrf_token %}
 		       	<input class="form-control mr-sm-2" type="hidden" name="content" value="{{ object.content }}">
-		       	<button class="btn btn-secondary btn-sm" style="position: absolute; left:550px;" type="submit">download</button>
+		       	<button class="btn btn-secondary btn-sm" style="position: absolute; left:570px;" type="submit">download</button>
 		     </form> 
 			</span>
 			<div class="article-content">
-				<pre>{{ object.content }}</pre>
+				<pre contenteditable="true">{{ object.content }}</pre>
 			</div>
 			{% if paste.expiry is not null%}
 				<small class="text-muted">Expires on: {{ paste.expiry|date:"F d, Y" }}</small>

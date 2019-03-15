@@ -54,9 +54,6 @@ def delete_user(request):
 	else:				
 		return render(request, 'users/user_confirm_delete.html')
 
-def change_notifications(request):
-	return render(request, 'users/change_notifications.html')
-
 @login_required
 def notifications(request):
 	return render(request, 'users/notifications.html')
