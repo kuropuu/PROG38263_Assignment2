@@ -66,56 +66,58 @@
 	
 	{% if uploadpastes %}
 		{% for upload in uploadpastes %}
-			{% if upload.privacy == "Public" or upload.creator == user %}
-				<hr>
-				<article class="media content-section">
-					<div class="media-body">
-						<div class="article-metadata">
-							<a class="mr-2 text-muted">{{ upload.privacy }}</a>
-							<a class="mr-2" href="#">{{ upload.creator }}</a><br>
-							<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
-						</div>
-						<h2><a class="article-title" href="{% url 'upload_detail' upload.slug %}">{{ upload.title }}</a></h2>
-						<p class="article-content">
-							<embed src="{{ upload.content.url }}" height=100px width=500px>
-						</p>
-						{% if upload.expiry %}
-							<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>
-						{% endif %}<br>
-						{% if upload.invited_users.all %}
-							<small class="text-muted">Invited Users:</small>	{% for username in upload.invited_users.all %}
-								<small class="text-muted">{{ username }}</small>
-							{% endfor %}
-						{% endif %}
-					</div>
-				</article>
-				<br>
-			{% endif %}
-			{% for username in upload.invited_users.all %}
-				{% if username == user %}
+			{% if upload.expired != True %}
+				{% if upload.privacy == "Public" or upload.creator == user %}
+					<hr>
 					<article class="media content-section">
 						<div class="media-body">
 							<div class="article-metadata">
-								<small class="mr-2 text-muted">You've been invited to view this paste:</small><br>
 								<a class="mr-2 text-muted">{{ upload.privacy }}</a>
 								<a class="mr-2" href="#">{{ upload.creator }}</a><br>
 								<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
 							</div>
-							<h2><a class="article-title" href="{% url 'paste-detail' upload.slug %}">{{ upload.title }}</a></h2>
-							<p class="article-content"><embed src="{{ upload.content.url }}" height=100px width=500px></p>
+							<h2><a class="article-title" href="{% url 'upload_detail' upload.slug %}">{{ upload.title }}</a></h2>
+							<p class="article-content">
+								<embed src="{{ upload.content.url }}" height=100px width=500px>
+							</p>
 							{% if upload.expiry %}
 								<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>
 							{% endif %}<br>
 							{% if upload.invited_users.all %}
-								<small class="text-muted">Invited Users:</small>
-								{% for username in upload.invited_users.all %}
+								<small class="text-muted">Invited Users:</small>	{% for username in upload.invited_users.all %}
 									<small class="text-muted">{{ username }}</small>
 								{% endfor %}
 							{% endif %}
 						</div>
 					</article>
+					<br>
 				{% endif %}
-			{% endfor %}
+				{% for username in upload.invited_users.all %}
+					{% if username == user %}
+						<article class="media content-section">
+							<div class="media-body">
+								<div class="article-metadata">
+									<small class="mr-2 text-muted">You've been invited to view this paste:</small><br>
+									<a class="mr-2 text-muted">{{ upload.privacy }}</a>
+									<a class="mr-2" href="#">{{ upload.creator }}</a><br>
+									<small class="text-muted">{{ upload.date_posted|date:"F d, Y" }}</small>
+								</div>
+								<h2><a class="article-title" href="{% url 'paste-detail' upload.slug %}">{{ upload.title }}</a></h2>
+								<p class="article-content"><embed src="{{ upload.content.url }}" height=100px width=500px></p>
+								{% if upload.expiry %}
+									<small class="text-muted">Expires on: {{ upload.expiry|date:"F d, Y" }}</small>
+								{% endif %}<br>
+								{% if upload.invited_users.all %}
+									<small class="text-muted">Invited Users:</small>
+									{% for username in upload.invited_users.all %}
+										<small class="text-muted">{{ username }}</small>
+									{% endfor %}
+								{% endif %}
+							</div>
+						</article>
+					{% endif %}
+				{% endfor %}
+			{% endif %}
 		{% endfor %}
 	{% endif %}
 

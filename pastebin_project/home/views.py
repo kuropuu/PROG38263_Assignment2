@@ -39,12 +39,14 @@ class UserPasteListView(ListView):
 	context_object_name = 'pastes'
 	paginate_by = 10
 
-	def get_queryset(self):
+	def get_context_data(self, **kwargs):
 		user = get_object_or_404(User, username=self.kwargs.get('username'))
-		return Paste.objects.filter(author=user).order_by('-date_posted')
-
-	def get_queryset(self):
-		return Paste.objects.order_by('-date_posted')
+		context = super(UserPasteListView, self).get_context_data(**kwargs)
+		context.update({
+			'uploadpastes': UploadPaste.objects.order_by('-date_posted'),
+			'more_context': Paste.objects.filter(author=user).order_by('-date_posted'),
+		})
+		return context
 
 class PasteDetailView(DetailView):
 	model = Paste
