@@ -13,6 +13,7 @@ This web application requires:
 
 ### Installation of Add-Ons
 Install Crispy Forms by running `pip install django-crispy-forms`.
+Install django-upload-validator by running `pip install django-upload-validator`
 
 ### Security Features
 We implemented the following security features into our web app:
