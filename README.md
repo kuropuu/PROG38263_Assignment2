@@ -10,14 +10,25 @@ This web application requires:
 * Crispy Forms
 * SQLite3
 * django-upload-validator
+* Celery
 
 ### Installation of Add-Ons
-Install Crispy Forms by running `pip install django-crispy-forms`.
-Install django-upload-validator by running `pip install django-upload-validator`
+- Install Crispy Forms by running `pip install django-crispy-forms`.
+- Install django-upload-validator by running `pip install django-upload-validator`.
+- Install Celery by running `pip install celery`.
+
+### Running the Server through Command Line
+For educational purposes, you can create a superuser to access the administrator page. In the project directory, run the following commands:
+```
+source django_venv/bin/activate
+python manage.py createsuperuser
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
 
 ### Security Features
 We implemented the following security features into our web app:
-* Web app is served over HTTPS
 * Secure authentication and authorization scheme
 * Passwords are hashed in the database
 * File uploads are validated to only allow .txt files
