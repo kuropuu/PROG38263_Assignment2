@@ -21,6 +21,7 @@ This web application requires:
 For educational purposes, you can create a superuser to access the administrator page. In the project directory, run the following commands:
 ```
 source django_venv/bin/activate
+cd pastebin_project
 python manage.py createsuperuser
 python manage.py makemigrations
 python manage.py migrate
