@@ -13,6 +13,7 @@ from .forms import PasteCreationForm, PasteUploadForm
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.utils.encoding import smart_str
 
 def home(request):
 	return render(request, 'home/home.html')
@@ -141,3 +142,11 @@ def download_paste(request, slug):
 	
 	return response
 
+def download_upload_paste(request, slug):
+	content = request.POST.get('content')
+	filename = slug+'.txt'
+
+	response = HttpResponse(content_type='text/plain')
+	response['Content-Disposition'] = 'attachment; filename=%s' %smart_str(filename)
+
+	return response
