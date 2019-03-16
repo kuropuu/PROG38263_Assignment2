@@ -12,7 +12,8 @@ from .views import (
 	UploadPasteDetailView,
 	UploadPasteDeleteView,
 	UploadPasteUpdateView,
-	download_paste
+	download_paste,
+	download_upload_paste
 )
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
 	path('paste/upload/<str:slug>/delete', UploadPasteDeleteView.as_view(), name='upload_delete'),
 	path('paste/upload/<str:slug>/update', UploadPasteUpdateView.as_view(), name='upload_update'),
 	path('paste/download/<str:slug>/', download_paste, name='download-paste'),
+	path('paste/download/upload/<str:slug>/', download_upload_paste, name='download-upload-paste'),
 	path('paste/<str:slug>/', PasteDetailView.as_view(), name='paste-detail'),
 	path('paste/<str:slug>/update/', PasteUpdateView.as_view(), name='paste-update'),
 	path('paste/<str:slug>/delete/', PasteDeleteView.as_view(), name='paste-delete'),
